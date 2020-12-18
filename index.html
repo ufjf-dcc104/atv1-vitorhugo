@@ -20,12 +20,16 @@
 
         let x = 100;
         let y = 150;
+        
+        function desenha(){
+            //Desenha fundo
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "white";
-        ctx.fillRect(x, y, 20, 20);
+            //Desenha elementos
+            ctx.fillStyle = "white";
+            ctx.fillRect(x, y, 20, 20);
+        }
     </script>
 </body>
 </html>
