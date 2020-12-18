@@ -20,8 +20,14 @@
 
         let x = 100;
         let y = 150;
+
+        let t0;
+        let dt;
         
-        function desenha(){
+        function desenha(t){
+            t0 = to ?? t;
+            dt = (t - t0)/1000;
+
             //Desenha fundo
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -29,6 +35,8 @@
             //Desenha elementos
             ctx.fillStyle = "white";
             ctx.fillRect(x, y, 20, 20);
+
+            t0 = t;
         }
     </script>
 </body>
