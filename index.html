@@ -23,6 +23,8 @@
 
         let t0;
         let dt;
+
+        requestAnimationFrame(desenha);
         
         function desenha(t){
             t0 = to ?? t;
@@ -32,9 +34,14 @@
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            //Atualiza estado
+            x = x +10*dt;
+
             //Desenha elementos
             ctx.fillStyle = "white";
             ctx.fillRect(x, y, 20, 20);
+
+            requestAnimationFrame(desenha);
 
             t0 = t;
         }
