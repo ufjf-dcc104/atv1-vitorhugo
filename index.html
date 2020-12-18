@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset=utf-8>
+  <title>DCC138 Exemplo01</title>
+  <link rel="stylesheet" href="stylesheets/style.css"></style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+</head>
+<body>
+    <h1>DCC138 Exemplo01</h1>
+    <canvas></canvas>
+    <p>por Vitor Hugo</p>
+    <script>
+        let canvas = document.querySelector("canvas");
+        let ctx = canvas.getContext("2d");
+
+        canvas.width = 480;
+        canvas.height = 320;
+
+        let x = 100;
+        let y = 150;
+
+        let t0;
+        let dt;
+
+        requestAnimationFrame(desenha);
+        
+        
+        function desenha(t){
+            t0 = to ?? t;
+            dt = (t - t0)/1000;
+
+            //Desenha fundo
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            //Atualiza estado
+            x = x + 10*dt;
+
+            //Desenha elementos
+            ctx.fillStyle = "white";
+            ctx.fillRect(x, y, 20, 20);
+
+            requestAnimationFrame(desenha);
+
+            t0 = t;
+        }
+    </script>
+</body>
+</html>
