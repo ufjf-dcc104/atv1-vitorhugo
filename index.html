@@ -18,8 +18,8 @@
         canvas.width = 480;
         canvas.height = 320;
 
-        let x = 100;
-        let y = 150;
+        let x = 150;
+        let y = 100;
 
         let t0;
         let dt;
@@ -27,15 +27,16 @@
         requestAnimationFrame(desenha);
         
         function desenha(t){
-            t0 = to ?? t;
+            t0 = t0 ?? t;
             dt = (t - t0)/1000;
 
             //Desenha fundo
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            //Atualiza estado
-            x = x +10*dt;
+            //Atualiza estados
+            x = x + 10*dt;
+            y = 100 + 1500*Math.cos(t/200)*dt;
 
             //Desenha elementos
             ctx.fillStyle = "white";
