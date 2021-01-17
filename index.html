@@ -25,23 +25,21 @@
             y : 100,
             vy : 0,
             ay : 0,
-            desenhar : function(){
-                ctx.fillStyle = "white";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            color : "white",
+            desenhar : desenharElemento,
+            mover: moverElemento
         };
 
         let e = {
-            ex : 300,
-            evx : 0,
-            eax : 0,
-            ey : 200,
-            evy : 0,
-            eay : 0,
-            desenhar : function(){  
-                ctx.fillStyle = "red";
-                ctx.fillRect(this.ex, this.ey, 20, 20);
-            }
+            x : 300,
+            vx : 0,
+            ax : 0,
+            y : 200,
+            vy : 0,
+            ay : 0,
+            color : "red",
+            desenhar : desenharElemento,
+            mover: moverElemento
         }
 
         let K = 180;
@@ -60,19 +58,12 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             //Controladores
-            e.eax = 0.5 * (p.x - e.ex) - 0.2 * e.evx;
-            e.eay = 0.5 * (p.y - e.ey) - 0.2 * e.evy;
+            e.ax = 0.5 * (p.x - e.x) - 0.2 * e.vx;
+            e.ay = 0.5 * (p.y - e.y) - 0.2 * e.vy;
 
             //Atualiza a dinamica dos estados
-            p.vx = p.vx + p.ax * dt;
-            p.x = p.x + p.vx * dt;
-            p.vy = p.vy + p.ay * dt;
-            p.y = p.y + p.vy * dt;
-
-            e.evx = e.evx + e.eax * dt;
-            e.ex = e.ex + e.evx * dt;
-            e.evy = e.evy + e.eay * dt;
-            e.ey = e.ey + e.evy * dt;
+            p.mover();
+            e.mover();
 
             //Desenha elementos
             p.desenhar();
@@ -121,6 +112,18 @@
             }
         }
 
+        
+        function moverElemento() { 
+            this.vx = this.vx + this.ax * dt;
+            this.x = this.x + this.vx * dt;
+            this.vy = this.vy + this.ay * dt;
+            this.y = this.y + this.vy * dt;
+        }
+
+        function desenharElemento(){  
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, 20, 20);
+        }
     </script>
 </body>
 </html>
