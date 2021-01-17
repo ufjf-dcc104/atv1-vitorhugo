@@ -18,6 +18,8 @@
         canvas.width = 480;
         canvas.height = 320;
 
+        let pontos = 0;
+
         let p = {
             x : 150,
             vx : 0,
@@ -92,12 +94,37 @@
             for (let s = 0; s < sprites.length; s++) {
                 const sprite = sprites[s];
                 //Controladores
-                if(sprite.controlar) sprite.controlar(p);            
+                sprite.controlar?.(p);            
                 //Atualiza a dinamica dos estados
-                if(sprite.mover) sprite.mover();
+                sprite.mover?.();
                 //Desenha elementos
-                if(sprite.desenhar) sprite.desenhar();
+                sprite.desenhar();
+
+                if(colidiram(o, sprite) && o !== sprite) {
+                    o.x = -1000;
+                    o.y = -1000;
+                    o.vx = 0;
+                    o.ax = 0;
+                    
+                    sprite.x = 1000; 
+                    sprite.vx = 100; 
+                    sprite.ax = 0; 
+
+                    pontos++;
+                }
+
+                if(colidiram(p, sprite) && o !== sprite) {                    
+                    sprite.x = 1000; 
+                    sprite.vx = 100; 
+                    sprite.ax = 0; 
+
+                    pontos -= 3;
+                }
             }
+
+            ctx.fillStyle = "yellow";
+            ctx.font = "20px Impact"
+            ctx.fillText(pontos, 10, 30)
 
             requestAnimationFrame(desenha);
             t0 = t;
@@ -171,6 +198,10 @@
         function evitarAlvo(alvo){  
             this.ax = -0.5 * (alvo.x - this.x) - 0.2 * this.vx;
             this.ay = -0.5 * (alvo.y - this.y) - 0.2 * this.vy;
+        }
+
+        function colidiram(A, B){
+            return !((A.x > B.x + 20) || (A.x + 20 < B.x) || (A.y > B.y + 20) || (A.y + 20 < B.y));
         }
     </script>
 </body>
